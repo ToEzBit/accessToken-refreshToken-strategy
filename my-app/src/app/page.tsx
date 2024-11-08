@@ -27,7 +27,9 @@ export default function Home() {
 
       console.log(res.data);
       setUser(res.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onClickLogout = async () => {
@@ -38,7 +40,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchMe();
+    // fetchMe();
+    console.log("first");
   }, []);
 
   return (

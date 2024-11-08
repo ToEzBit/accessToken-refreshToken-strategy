@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (!accessToken) return;
     const authInterceptor = axiosInstance.interceptors.request.use((config) => {
       config.headers.Authorization =
-        //@ts-expect-error: retry is custom props from line 80
+        //@ts-expect-error: retry is custom props from line 75
         !config._retry && accessToken
           ? `Bearer ${accessToken}`
           : config.headers.Authorization;
@@ -57,11 +57,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       (response) => response,
       async (error) => {
         const originalRequest = error.config;
-
-        // Initialize _retryCount if not already set
-        if (!originalRequest._retryCount) {
-          originalRequest._retryCount = 0;
-        }
 
         if (
           error.response.status === 401 &&
